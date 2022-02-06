@@ -1,0 +1,215 @@
+html, body{
+  background-color: white;
+  margin:0;
+  padding:0;
+  padding-top:0;
+  min-height:100vh;
+  z-index:1;
+}
+
+.title-container{
+  position:absolute;
+  top:0;
+  margin-bottom:0;
+  width:100vw;
+  text-align: center;
+  background-color: rgb(165, 158, 158);
+  color:white;
+  opacity: .9;
+}
+.title{
+  font-size:3rem;
+}
+
+.form-container{
+  margin-top: 0rem;
+  margin-left: 30vw;
+  margin-right: 30vw;
+  min-height:400px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index:-1;
+  min-width:18rem;
+  min-height:100%;
+  border-radius:20px;
+  padding:0;
+  margin-top:-9rem;
+  font-size: 1.7rem;
+  background-color: rgb(162, 214, 205);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.form button{
+  height:2rem;
+  color:white;
+}
+
+.checkbox-label{
+  font-size:1.5rem;
+  justify-self:center;
+}
+.sub{
+  margin-bottom:1rem;
+  margin-top:1rem;
+  border-radius:5px;
+  font-size:1.2rem;
+  border:transparent
+}
+
+.book-container{
+  display:grid;
+  justify-content: space-around;
+  max-width:75%;
+  margin-left:12%;
+  grid-template-columns: 1fr 1fr;
+  grid-gap:3rem;
+  margin-top:-22rem;
+}
+
+div div {
+  border:transparent;
+  text-align: center;
+  background-color: rgba(30, 29, 31, 0.6);
+  color:White;
+}
+
+div h1{
+  font-size: 2rem;
+}
+
+div p{
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+
+/* FORM AND BUTTON STYLING */ 
+
+.label{
+  display:flex;
+  justify-content: center;
+  margin-top:-1rem;
+}
+
+input{
+  font-size:1.5rem;
+  text-align: center;
+  justify-self: center;
+  border:transparent;
+  width:75%;
+}
+.check-box{
+  margin-left:13rem;
+}
+
+.button-container{
+  display: flex;
+  justify-content: center;
+  z-index:-1;
+}
+
+button{
+  height:10rem;
+  width:10rem;
+  font-size: 16px;
+  margin-top:10px;
+  padding-top: 5px;
+  border:none;
+  background-color: rgb(73, 150, 221);
+  color:white;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+.add-note{
+  margin-top: 9rem;
+  margin-bottom:0;
+  z-index: 1;
+  border-radius: 5px;
+  height:40px;
+  font-size: 1.2rem;
+}
+.add-note:hover{
+  background-color: rgb(123, 181, 235);
+  color:white;
+}
+
+.close-form{
+  width:2rem;
+  height:2rem;
+  align-self: flex-end;
+  text-align: center;
+  font-size: 12px;
+  margin-right:0.5rem;
+  margin-top:1rem;
+}
+
+.close-form:hover{
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.submit-button{
+  margin-top:20px;
+  height:40px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.submit-button:hover{
+  background-color: lightgray;
+  color:white;
+}
+
+.card-button{
+  max-height:2rem;
+  margin-right:0.3rem;
+  max-width:5rem;
+  font-size:0.8rem;
+}
+
+/* Conditional */
+
+.read{
+  background-color:green;
+}
+.not-read{
+  background-color: red;
+}
+
+.hidden{
+  z-index:-1 !important;
+}
+.visible{
+  z-index:1 !important;
+}
+.opaque{
+  opacity:0.5 !important;
+}
+
+/* Queries */
+
+@media (max-width:500px){
+  .form{
+    max-width:15rem !important;
+  }
+  .book-container{
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media(min-width:1000px){
+  .book-container{
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+}

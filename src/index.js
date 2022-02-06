@@ -1,12 +1,13 @@
+import  './style.css';
+
 const titleDiv = document.querySelector(".title-container")
-const formDiv = document.querySelector(".form-container");
-const formPage = document.querySelector(".form-1");
+const formPage = document.querySelector(".form");
 const bookDiv = document.querySelector(".book-container");
 
-const titleInput = document.querySelector(".title");
-const authInput = document.querySelector(".author");
-const pageInput = document.querySelector(".pages");
-const checkInput = document.querySelector("#check-box");
+const titleInput = document.querySelector(".title-input");
+const authInput = document.querySelector(".author-input");
+const pageInput = document.querySelector(".pages-input");
+const checkInput = document.querySelector(".check-box");
 
 
 const addButton = document.querySelector(".add-note");
@@ -14,7 +15,6 @@ const subButton = document.querySelector(".sub");
 const closeButton = document.querySelector(".close-form");
 
 var myLibrary = [];
-
 
 class Book {
   constructor(
@@ -67,13 +67,11 @@ function displayForm(){
   authInput.value = "";
   pageInput.value = "";
   
-  document.body.style.background = "rgba(0,0,0,0.5)";
-  formPage.style.zIndex = 1;
-  formPage.style.border = "1px solid gray";
-  titleDiv.style.background = "rgba(0,255,255,0.5)";
+  formPage.classList.add('visible');
 
-  addButton.style.zIndex = -1;
-  titleDiv.style.zIndex = -1;
+  addButton.classList.add('hidden');
+  titleDiv.classList.add('opaque');
+  bookDiv.classList.add('opaque');
 }
 
 //HIDE FORM AFTER ADDING BOOK 
@@ -87,53 +85,46 @@ function hideForm(){
   } else if (pageInput.value == ""){
     return; 
   }
-  document.body.style.background = "rgb(255,255,255)"
-  formPage.style.zIndex = -1;
-  titleDiv.style.background = "rgb(0,255,255)";
-
-  addButton.style.zIndex = 1;
-  titleDiv.style.zIndex = 1;
+  formPage.classList.remove('visible');
+  addButton.classList.remove('hidden');
+  titleDiv.classList.remove('opaque');
+  bookDiv.classList.remove('opaque');
 }
 
 //HIDE FORM BY CLICKING CLOSE
 
 function hideFormB(){
-
-  document.body.style.background = "rgb(255,255,255)"
-  formPage.style.zIndex = -1;
-  titleDiv.style.background = "rgb(0,255,255)";
-
-  addButton.style.zIndex = 1;
-  titleDiv.style.zIndex = 1;
+  formPage.classList.remove('visible');
+  addButton.classList.remove('hidden');
+  titleDiv.classList.remove('opaque');
+  bookDiv.classList.remove('opaque');
 }
 
 //CHANGE READ
 
-bookDiv.addEventListener('click', changeRead);
-
 function changeRead(e){
   if (e.target.classList.contains("read")){
-    if (e.target.innerHTML === "Read"){
-    findBook(e.target.parentNode.firstChild.innerHTML).isRead = false;
-    e.target.innerHTML = "Not Read";
+    findBook(e.target.parentNode.firstChild.textContent).isRead = false;
     e.target.textContent = "Not Read"
+    e.target.classList.remove("read");
+    e.target.classList.add("not-read");
     e.target.style.background = "Red";
-  } else {
-    findBook(e.target.parentNode.firstChild.innerHTML).isRead = true;
-    e.target.innerHTML = "Read";
+  } else if (e.target.classList.contains("read")===false){
+    findBook(e.target.parentNode.firstChild.textContent).isRead = true;
     e.target.textContent = "Read";
+    e.target.classList.remove("not-read")
+    e.target.classList.add("read");
     e.target.style.background = "Green";
-  }
   }
 }
 
 //MAKE BOOK CARDS
 
-let a;
-let b;
-let c;
-let d; 
-let f;
+let title;
+let author;
+let pages;
+let readStatus;
+let remove; 
 let divCard; 
 
 function makeCards(book){
@@ -155,40 +146,42 @@ function makeCards(book){
 
   divCard = document.createElement('div');
   
-  a = document.createElement("H1");
-  a.textContent = titleInput.value; 
+  title = document.createElement("H1");
+  title.textContent = titleInput.value; 
 
-  b = document.createElement('p');
-  b.textContent = "By: " + authInput.value
+  author = document.createElement('p');
+  author.textContent = "By: " + authInput.value
 
-  c = document.createElement('p');
-  c.textContent = "Pages: " + pageInput.value;
+  pages = document.createElement('p');
+  pages.textContent = "Pages: " + pageInput.value;
 
-  d = document.createElement("BUTTON");
+  readStatus = document.createElement("BUTTON");
+ 
     if (checkInput.checked){
-      d.textContent = "Read";
-      d.style.background = "Green";
+      readStatus.textContent = "Read";
+      readStatus.classList.add("read");
     } else {
-      d.textContent = "Not Read";
-      d.style.background = "Red";
+      readStatus.textContent = "Not Read";
+      readStatus.classList.add("not-read");
   }; 
 
-  d.classList.add("read");
+
   
-  f = document.createElement("BUTTON");
-  f.textContent = "Remove";
-  f.addEventListener('click',removeCards);
+      remove = document.createElement("BUTTON");
+      remove.classList.add('card-button')
+      remove.textContent = "Remove";
+      remove.addEventListener('click',removeCards);
 
-  divCard.appendChild(a);
-  divCard.appendChild(b);
-  divCard.appendChild(c);
-  divCard.appendChild(d);
-  divCard.appendChild(f);
+      divCard.appendChild(title);
+      divCard.appendChild(author);
+      divCard.appendChild(pages);
+      divCard.appendChild(readStatus);
+      divCard.appendChild(remove);
 
-  bookDiv.appendChild(divCard);
-  checkInput.checked = false;
-
-} 
+      readStatus.classList.add('card-button');
+      bookDiv.appendChild(divCard);
+      checkInput.checked = false;
+}  
 
 //REMOVE CARDS. REMOVE FROM LIBRARY.
 
@@ -212,3 +205,4 @@ formPage.addEventListener('submit',addBook);
 subButton.addEventListener('click', hideForm);
 closeButton.addEventListener('click',hideFormB);
 subButton.addEventListener('click', makeCards);
+bookDiv.addEventListener('click', changeRead);
